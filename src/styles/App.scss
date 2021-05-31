@@ -1,0 +1,26 @@
+// Colors
+$black: rgba(20, 20, 20, 1);
+$darkergrey: rgba(50, 50, 50, 1);
+$darkgrey: rgba(70, 70, 70, 1);
+$grey: rgba(130, 130, 130, 1);
+$lightgrey: rgba(230, 230, 230, 1);
+$lightergrey: rgba(240, 240, 240, 1);
+$blue: royalblue;
+$red: tomato;
+$yellow: goldenrod;
+
+// Media Query Widths
+$width--s: 400px;
+$width--m: 600px;
+$width--l: 750px;
+
+// Mixins
+@mixin mQ($width) {
+    @media only screen and (max-width: $width) {
+        @content;
+    }
+}
+
+.App {
+    color: $black;
+}
