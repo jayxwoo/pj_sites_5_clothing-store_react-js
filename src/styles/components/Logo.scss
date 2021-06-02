@@ -1,0 +1,13 @@
+@import "../base";
+
+.logo {
+    text-decoration: none;
+    color: $darkergrey;
+    text-transform: uppercase;
+    font-size: 1.25rem;
+    font-weight: 900;
+
+    &:hover {
+        font-style: italic;
+    }
+}

@@ -1,13 +1,22 @@
 // Colors
 $black: rgba(20, 20, 20, 1);
+$black-o: rgba(20, 20, 20, 0.1);
 $darkergrey: rgba(50, 50, 50, 1);
+$darkergrey-o: rgba(50, 50, 50, 0.1);
 $darkgrey: rgba(70, 70, 70, 1);
+$darkgrey-o: rgba(70, 70, 70, 0.1);
 $grey: rgba(130, 130, 130, 1);
+$grey-o: rgba(130, 130, 130, 0.1);
 $lightgrey: rgba(230, 230, 230, 1);
+$lightgrey-o: rgba(230, 230, 230, 0.1);
 $lightergrey: rgba(240, 240, 240, 1);
-$blue: royalblue;
-$red: tomato;
-$yellow: goldenrod;
+$lightergrey-o: rgba(240, 240, 240, 0.1);
+$blue: rgba(65, 105, 225, 1);
+$blue-o: rgba(65, 105, 225, 0.1);
+$red: rgba(255, 99, 71, 1);
+$red-o: rgba(255, 99, 71, 0.1);
+$yellow: rgba(218, 165, 32, 1);
+$yellow-o: rgba(218, 165, 32, 0.1);
 
 // Media Query Widths
 $width--s: 400px;
