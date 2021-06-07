@@ -1,0 +1,54 @@
+@import "../base";
+
+.footer {
+    width: 100%;
+    background: $darkergrey;
+    color: white;
+}
+.footer-cont {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem;
+
+    .logo {
+        color: white;
+    }
+
+    .icon-group {
+        display: flex;
+
+        .icon-item {
+            &:not(:last-of-type) {
+                margin-right: 1rem;
+            }
+
+            .icon-link {
+                display: flex;
+                color: $lightgrey;
+                font-size: 1.5rem;
+
+                &:hover {
+                    color: white;
+                }
+            }
+        }
+    }
+}
+
+@include mQ($width--l) {
+    .footer-cont {
+        flex-direction: column;
+
+        .logo {
+            margin-bottom: 1rem;
+        }
+
+        .copyrights {
+            margin-bottom: 1.5rem;
+        }
+    }
+}

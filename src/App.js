@@ -7,6 +7,7 @@ import Shop from "./pages/Shop";
 import Seller from "./pages/Seller";
 import Cart from "./pages/Cart";
 import Navbar from "./components/Navbar";
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
                 <Route path="/seller"><Seller /></Route>
                 <Route path="/cart"><Cart /></Route>
               </Switch>
+              <Footer />
           </div>
         </MenuBtnContextProvider>
       </MobileContextProvider>
