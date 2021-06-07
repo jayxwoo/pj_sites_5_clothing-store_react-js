@@ -13,8 +13,12 @@ const MenuBtnContextProvider = (props) => {
         setMenuBtn(true);
     };
 
+    const handleMenuBtn = () => {
+        setMenuBtn(!menuBtn);
+    };
+
     return (
-        <MenuBtnContext.Provider value={{ menuBtn, closeMenuBtn, openMenuBtn }}>
+        <MenuBtnContext.Provider value={{ menuBtn, closeMenuBtn, openMenuBtn, handleMenuBtn }}>
             {props.children}
         </MenuBtnContext.Provider>
     );

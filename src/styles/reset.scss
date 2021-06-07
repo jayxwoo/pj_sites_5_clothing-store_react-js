@@ -5,6 +5,7 @@ html {
     scroll-behavior: smooth;
   }
 body {
+  overflow-x: hidden;
   min-height: 100vh;
   text-rendering: optimizeSpeed;
   line-height: 1.5;
@@ -44,4 +45,7 @@ ul, ol {
 }
 fieldset {
   border: none;
+}
+body.no-scroll {
+  overflow-y: hidden;
 }

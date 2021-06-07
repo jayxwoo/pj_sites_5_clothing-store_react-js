@@ -1,52 +1,50 @@
 @import "../base";
 
 .btn {
-    text-transform: uppercase;
-    background: none;
-    border-radius: 0.2rem;
-    cursor: pointer;
-
-    a {
-        text-decoration: none;
-    }
+  text-transform: uppercase;
+  background: none;
+  border-radius: 0.2rem;
+  cursor: pointer;
 }
 
 .btn-outline--black {
-    border: 1px solid $darkergrey;
-    color: $darkergrey;
+  border: 1px solid $darkergrey;
+  color: $darkergrey;
 
-    a {
-        color: $darkergrey; 
-    }
-
-    &:hover {
-        background: $darkergrey-o;
-    }
+  &:hover {
+    background: $darkergrey-o;
+  }
 }
 
 .btn-outline--white {
-    border: 1px solid white;
-    color: white;
+  border: 1px solid white;
+  color: white;
 
-    a {
-        color: white;
-    }
-
-    &:hover {
-        background: rgba(255, 255, 255, 0.5);
-    }
+  &:hover {
+    background: rgba(255, 255, 255, 0.5);
+  }
 }
 
 .btn--medium {
-    padding: 0.5rem 0.75rem;
+  padding: 0.5rem 0.75rem;
 }
 
 .btn--large {
-    padding: 1rem 1.5rem;
-    font-size: 1rem;
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
 }
 
 .btn--mobile {
+  width: 80%;
+  padding: 1rem;
+}
+
+.btnLink > .btn--mobile {
+    width: 100%;
+}
+
+@include mQ($width--l) {
+  .btnLink {
     width: 80%;
-    padding: 1rem;   
+  }
 }
