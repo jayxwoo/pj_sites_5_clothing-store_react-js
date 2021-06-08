@@ -25,6 +25,34 @@
   }
 }
 
+.btn-outline--red {
+  border: 1px solid $red;
+  color: $red;
+
+  &:hover {
+    background: $red-o;
+  }
+}
+
+.btn-outline--green {
+  border: 1px solid $green;
+  color: $green;
+
+  &:hover {
+    background: $green-o;
+  }
+}
+
+.btn-outline--blue {
+  border: 1px solid $blue;
+  color: $blue;
+
+  &:hover {
+    background: $blue-o;
+  }
+}
+
+
 .btn--medium {
   padding: 0.5rem 0.75rem;
 }
