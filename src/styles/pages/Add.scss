@@ -1,1 +1,13 @@
 @import "../base";
+
+.add {
+    border: 3px solid red;
+    width: 100%;
+    min-height: 100vh;
+
+    .form {
+        border: 3px solid blue;
+        width: 100%;
+        max-width: 1000px;
+    }
+}
