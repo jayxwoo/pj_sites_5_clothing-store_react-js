@@ -8,6 +8,8 @@ import productImg_02 from "../assets/imgs/productImgs/productImg_02.jpeg";
 import productImg_03 from "../assets/imgs/productImgs/productImg_03.jpeg";
 import productImg_04 from "../assets/imgs/productImgs/productImg_04.jpeg";
 import { Link } from "react-router-dom";
+import Header from "../components/Header";
+import { headerData } from "../data/headerData";
 
 const Seller = () => {
     const { closeMenuBtn } = useContext(MenuBtnContext);
@@ -20,8 +22,9 @@ const Seller = () => {
 
     return (
         <div className="seller">
+            <Header data={headerData.seller} />
+                <Link to="/add" className="addLink"><Button btnStyle="btn-outline--black" btnSize="btn--medium" className="addBtn"><AiOutlinePlus /></Button></Link>
             <div className="seller-cont">
-                <Link to="/add"><Button btnStyle="btn-outline--black" btnSize="btn--medium" className="addBtn"><AiOutlinePlus /></Button></Link>
                 <ul className="product-group">
                     <li className="product-item">
                         <div className="img-cont">

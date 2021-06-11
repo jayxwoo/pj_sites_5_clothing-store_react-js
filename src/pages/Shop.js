@@ -1,5 +1,7 @@
 import { useContext, useEffect } from "react";
+import Header from "../components/Header";
 import { MenuBtnContext } from "../contexts/MenuBtnContext";
+import { headerData } from "../data/headerData";
 import "../styles/pages/Shop.scss";
 
 const Shop = () => {
@@ -13,8 +15,8 @@ const Shop = () => {
 
     return (
         <div className="shop">
+            <Header data={headerData.shop} />
             <div className="shop-cont">
-                <h1>Shop</h1>
             </div>
         </div>
     );

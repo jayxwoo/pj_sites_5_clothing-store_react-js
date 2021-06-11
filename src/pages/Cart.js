@@ -1,6 +1,8 @@
 import { useContext, useEffect } from "react";
 import "../styles/pages/Cart.scss";
 import { MenuBtnContext } from "../contexts/MenuBtnContext";
+import Header from "../components/Header";
+import { headerData } from "../data/headerData";
 
 const Cart = () => {
     const { closeMenuBtn } = useContext(MenuBtnContext);
@@ -13,8 +15,8 @@ const Cart = () => {
 
     return (
         <div className="cart">
+            <Header data={headerData.cart} />
             <div className="cart-cont">
-                <h1>Cart</h1>
             </div>
         </div>
     );

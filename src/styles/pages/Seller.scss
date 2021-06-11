@@ -3,6 +3,21 @@
 .seller {
   width: 100%;
   background: $lightergrey;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .header {
+    margin-bottom: 3rem;
+  }
+
+  .addBtn {
+    display: flex;
+    border-radius: 50%;
+    padding: 0.5rem;
+    font-size: 1.5rem;
+  }
 
   .seller-cont {
     width: 100%;
@@ -13,16 +28,8 @@
     align-items: center;
     padding: 3rem 1.5rem;
 
-    .addBtn {
-      display: flex;
-      border-radius: 50%;
-      padding: 0.5rem;
-      font-size: 1.5rem;
-    }
-
     .product-group {
       width: 100%;
-      margin-top: 3rem;
 
       .product-item {
         width: 100%;
