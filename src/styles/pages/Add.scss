@@ -7,7 +7,7 @@
   align-items: center;
 
   .header {
-      margin-bottom: 3rem;
+    margin-bottom: 3rem;
   }
 
   .backBtn {
@@ -63,7 +63,6 @@
       &.active {
         opacity: 1;
         transform: translateY(0);
-        transition: all 0.3s ease-in-out;
       }
     }
 
@@ -81,7 +80,37 @@
       &.active {
         opacity: 1;
         transform: translateY(0);
-        transition: all 0.3s ease-in-out;
+      }
+    }
+
+    .progress-cont {
+      width: 100%;
+      border: 1px solid $green;
+      padding: 0.1rem;
+      border-radius: 0.6rem;
+      position: relative;
+      text-align: center;
+      color: $green;
+      opacity: 0;
+      transform: translateY(100%);
+      transition: all 0.3s ease-in-out;
+
+      &.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .text {
+        font-size: 0.6rem;
+      }
+
+      .progress-bar {
+        background: $green-o;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        transition: all 0.5s ease-in-out;
       }
     }
   }

@@ -15,11 +15,13 @@ const MobileContextProvider = (props) => {
 
     useEffect(() => {
         checkMobile();
+
+        window.addEventListener('resize', () => {
+            checkMobile();
+       });
     }, []);
 
-    window.addEventListener('resize', () => {
-         checkMobile();
-    });
+    
 
     return (
         <MobileContext.Provider value={{mobile}}>

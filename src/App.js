@@ -15,7 +15,7 @@ function App() {
     <Router>
       <MobileContextProvider>
         <MenuBtnContextProvider>
-          <div className="App">
+            <div className="App">
               <Navbar />
               <Switch>
                 <Route exact path="/"><Home /></Route>
@@ -25,7 +25,7 @@ function App() {
                 <Route path="/add"><Add /></Route>
               </Switch>
               <Footer />
-          </div>
+            </div>
         </MenuBtnContextProvider>
       </MobileContextProvider>
     </Router>

@@ -1,11 +1,11 @@
 import { useRef, useState } from "react";
 import Button from "../components/Button";
 import "../styles/pages/Add.scss";
-import { storage, database } from "../firebase/config";
+import { storage, database, timestamp } from "../firebase/config";
 import Header from "../components/Header";
 import { headerData } from "../data/headerData";
-import { useHistory } from "react-router-dom";
 import { AiOutlineLeft } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 const Add = () => {
     const [title, setTitle] = useState('');
@@ -16,12 +16,14 @@ const Add = () => {
     const [file, setFile] = useState(null);
     const [error, setError] = useState('');
     const [mssg, setMssg] = useState('');
+    const [uploading, setUploading] = useState(false);
+    const [progress, setProgress] = useState(0);
 
     const fileInput = useRef();
     const genderInput = useRef();
     const types = ["image/png", "image/jpeg"];
-    const history = useHistory();
 
+    // Handle file
     const handleFile = (e) => {
         let selected = e.target.files[0];
 
@@ -34,59 +36,66 @@ const Add = () => {
         }
     };
 
+    // Handle form submit event
     const handleSubmit = (e) => {
         e.preventDefault();
 
         if (file) {
             const storageRef = storage.ref(`product-imgs/${file.name}`);
+            const collectionRef = database.collection('products');
 
+            // Upload an image to firebase storage
             storageRef.put(file).on('state_changed', (snap) => {
-                const progress = (snap.bytesTransferred / snap.totalBytes) * 100;
-                console.log(progress);
+                setUploading(true);
+                const p = (snap.bytesTransferred / snap.totalBytes) * 100;
+                setProgress(p);
             }, (err) => {
                 setError(err.message);
-            }, () => {
-                storage.ref('product-imgs').child(file.name).getDownloadURL().then((url) => {
-                    database.collection('product').add({
-                        title: title,
-                        price: price,
-                        gender: gender,
-                        quantity: quantity,
-                        desc: desc,
-                        img: url,
-                        createdAt: new Date(),
-                    }).then(() => {
-                        setTitle('');
-                        setPrice('');
-                        setGender('');
-                        setQuantity('');
-                        setDesc('');
-                        setFile(null);
-                        setError('');
-                        fileInput.current.value = '';
-                        genderInput.current.value = '';
-                        setMssg('Your product has been uploaded successfully!');
-                        setTimeout(() => {
-                            setMssg('');
-                        }, 3000);
-                    }).catch((err) => {
-                        setError(err.message);
-                    });
+                setUploading(false);
+            }, async () => {
+                // Get url of the image stored on firebase storage
+                const url = await storage.ref('product-imgs').child(file.name).getDownloadURL();
+                const createdAt = timestamp();
+
+                // Add product to firebase firestore(database)
+                collectionRef.add({
+                    title: title,
+                    price: price,
+                    gender: gender,
+                    quantity: quantity,
+                    desc: desc,
+                    img: url,
+                    createdAt: createdAt,
+                }).then(() => {
+                    setTitle('');
+                    setPrice('');
+                    setGender('');
+                    setQuantity('');
+                    setDesc('');
+                    setFile(null);
+                    setError('');
+                    fileInput.current.value = '';
+                    genderInput.current.value = '';
+                    setMssg('Your product has been uploaded successfully!');
+                    setTimeout(() => {
+                        setMssg('');
+                    }, 2000);
+                    setUploading(false);
+                    setProgress(0);
+                }).catch((err) => {
+                    setError(err.message);
+                    setUploading(false);
                 });
             });
         } else {
             alert("Please select an image file (png or jpeg)!");
         };
     };
-    
-    const handleBackBtn = () => {
-        history.go(-1);
-    };
 
     return (
         <div className="add">
             <Header data={headerData.add} />
-            <Button btnStyle="btn-outline--black" btnSize="btn--medium" className="backBtn" onClick={handleBackBtn}><AiOutlineLeft /></Button>
+            {!mssg && <Link to="/seller" className="backLink"><Button btnStyle="btn-outline--black" btnSize="btn--medium" className="backBtn"><AiOutlineLeft /></Button></Link>}
             <form className="form" onSubmit={handleSubmit}>
                 <label className="a11y-hidden">Title</label>
                 <input type="text" className="title input" placeholder="Title" value={title} onChange={(e) => { setTitle(e.target.value) }} required />
@@ -112,6 +121,10 @@ const Add = () => {
                 <input type="file" className="file input" onChange={handleFile} ref={fileInput} required />
                 <div className={error ? "error active" : "error a11y-hidden"}>{error}</div>
                 <div className={mssg ? "mssg active" : "mssg a11y-hidden"}>{mssg}</div>
+                <div className={uploading ? "progress-cont active" : "progress-cont a11y-hidden"}>
+                    <p className="text">Uploading..</p>
+                    <div className="progress-bar" style={{width: `${progress}%`}}></div>
+                </div>
 
                 <Button btnStyle="btn-outline--black">Add</Button>
             </form>
