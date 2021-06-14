@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import Button from "../components/Button";
 import "../styles/pages/Add.scss";
 import { storage, database, timestamp } from "../firebase/config";
@@ -6,8 +6,11 @@ import Header from "../components/Header";
 import { headerData } from "../data/headerData";
 import { AiOutlineLeft } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import { MenuBtnContext } from "../contexts/MenuBtnContext";
 
 const Add = () => {
+    const { closeMenuBtn } = useContext(MenuBtnContext);
+
     const [title, setTitle] = useState('');
     const [price, setPrice] = useState('');
     const [gender, setGender] = useState('');
@@ -22,6 +25,14 @@ const Add = () => {
     const fileInput = useRef();
     const genderInput = useRef();
     const types = ["image/png", "image/jpeg"];
+
+    // Close menu btn and scroll to top on load
+    useEffect(() => {
+        closeMenuBtn();
+        window.scrollTo(0, 0);
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     // Handle file
     const handleFile = (e) => {
@@ -55,7 +66,6 @@ const Add = () => {
             }, async () => {
                 // Get url of the image stored on firebase storage
                 const url = await storage.ref('product-imgs').child(file.name).getDownloadURL();
-                const createdAt = timestamp();
 
                 // Add product to firebase firestore(database)
                 collectionRef.add({
@@ -65,7 +75,7 @@ const Add = () => {
                     quantity: quantity,
                     desc: desc,
                     img: url,
-                    createdAt: createdAt,
+                    createdAt: timestamp(),
                 }).then(() => {
                     setTitle('');
                     setPrice('');
@@ -119,7 +129,7 @@ const Add = () => {
 
                 <label className="a11y-hidden">File</label>
                 <input type="file" className="file input" onChange={handleFile} ref={fileInput} required />
-                
+
                 <div className={error ? "error active" : "error a11y-hidden"}>{error}</div>
                 <div className={mssg ? "mssg active" : "mssg a11y-hidden"}>{mssg}</div>
                 <div className={uploading ? "progress-cont active" : "progress-cont a11y-hidden"}>

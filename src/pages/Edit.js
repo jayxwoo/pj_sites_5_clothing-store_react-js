@@ -1,14 +1,16 @@
 import "../styles/pages/Edit.scss";
-import { useEffect, useRef, useState } from "react";
-import { useParams } from "react-router";
+import { useContext, useEffect, useRef, useState } from "react";
+import { useHistory, useParams } from "react-router";
 import Button from "../components/Button";
-import { database, storage, timestamp } from "../firebase/config";
+import { database, storage } from "../firebase/config";
 import { headerData } from "../data/headerData";
 import Header from "../components/Header";
-import { Link } from "react-router-dom";
 import { AiOutlineLeft } from "react-icons/ai";
+import { MenuBtnContext } from "../contexts/MenuBtnContext";
 
 const Edit = () => {
+    const { closeMenuBtn } = useContext(MenuBtnContext);
+
     const [title, setTitle] = useState('');
     const [price, setPrice] = useState('');
     const [gender, setGender] = useState('');
@@ -17,15 +19,22 @@ const Edit = () => {
     const [file, setFile] = useState(null);
     const [error, setError] = useState('');
     const [mssg, setMssg] = useState('');
-    const [uploading, setUploading] = useState(false);
-    const [progress, setProgress] = useState(0);
     const [img, setImg] = useState('');
 
     const fileInput = useRef();
     const genderInput = useRef();
     const types = ["image/png", "image/jpeg"];
+    const history = useHistory();
 
     const { id } = useParams();
+
+    // Close menu btn and scroll to top on load
+    useEffect(() => {
+        closeMenuBtn();
+        window.scrollTo(0, 0);
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     useEffect(() => {
         const collectionRef = database.collection('products');
@@ -48,67 +57,87 @@ const Edit = () => {
             setFile(selected);
         } else {
             setFile(null);
-            setError("Please select an image file (png or jpeg)!");
+            setError("Please select an image file (png or jpeg) or leave it empty to use the image uploaded previously!");
         };
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        const collectionRef = database.collection('products');
+        setMssg('Processing... Please wait!');
 
         if (file) {
             const storageRef = storage.ref(`product-imgs/${file.name}`);
-            const collectionRef = database.collection('products');
 
             // Upload an image to firebase storage
             storageRef.put(file).on('state_changed', (snap) => {
-                setUploading(true);
                 const p = (snap.bytesTransferred / snap.totalBytes) * 100;
-                setProgress(p);
+                console.log(p);
             }, (err) => {
                 setError(err.message);
-                setUploading(false);
+                setMssg('');
             }, async () => {
                 // Get url of the image stored on firebase storage
                 const url = await storage.ref('product-imgs').child(file.name).getDownloadURL();
-                const createdAt = timestamp();
 
                 // Add product to firebase firestore(database)
-                collectionRef.add({
+                collectionRef.doc(id).update({
                     title: title,
                     price: price,
                     gender: gender,
                     quantity: quantity,
                     desc: desc,
                     img: url,
-                    createdAt: createdAt,
                 }).then(() => {
                     setTitle('');
                     setPrice('');
                     setGender('');
                     setQuantity('');
                     setDesc('');
+                    setImg('');
                     setFile(null);
                     setError('');
+                    setMssg('');
                     fileInput.current.value = '';
                     genderInput.current.value = '';
-                    setMssg('Your product has been uploaded successfully!');
-                    setTimeout(() => {
-                        setMssg('');
-                    }, 2000);
-                    setUploading(false);
-                    setProgress(0);
+                    history.go(-1);
                 }).catch((err) => {
                     setError(err.message);
-                    setUploading(false);
+                    setMssg('');
                 });
             });
-        }
+        } else {
+            // Add product to firebase firestore(database)
+            collectionRef.doc(id).update({
+                title: title,
+                price: price,
+                gender: gender,
+                quantity: quantity,
+                desc: desc,
+                img: img,
+            }).then(() => {
+                setTitle('');
+                setPrice('');
+                setGender('');
+                setQuantity('');
+                setDesc('');
+                setImg('');
+                setFile(null);
+                setError('');
+                fileInput.current.value = '';
+                genderInput.current.value = '';
+                history.go(-1);
+            }).catch((err) => {
+                setError(err.message);
+                setMssg('');
+            });
+        };
     };
 
     return (
         <div className="edit">
             <Header data={headerData.edit} />
-            {!mssg && <Link to="/seller" className="backLink"><Button btnStyle="btn-outline--black" btnSize="btn--medium" className="backBtn"><AiOutlineLeft /></Button></Link>}
+            <Button btnStyle="btn-outline--black" btnSize="btn--medium" className="backBtn" onClick={() => { history.go(-1) }}><AiOutlineLeft /></Button>
             <form className="form" onSubmit={handleSubmit}>
                 <label className="a11y-hidden">Title</label>
                 <input type="text" className="title input" placeholder="Title" value={title} onChange={(e) => { setTitle(e.target.value) }} required />
@@ -131,15 +160,11 @@ const Edit = () => {
                 <textarea className="desc input" placeholder="Description" value={desc} onChange={(e) => { setDesc(e.target.value) }} required></textarea>
 
                 <label className="a11y-hidden">File</label>
-                <input type="file" className="file input" onChange={handleFile} ref={fileInput} required />
+                <input type="file" className="file input" onChange={handleFile} ref={fileInput} />
                 <small className="file-notice">*Previous image file will be used automatically, if no file is newly selected.</small>
 
                 <div className={error ? "error active" : "error a11y-hidden"}>{error}</div>
                 <div className={mssg ? "mssg active" : "mssg a11y-hidden"}>{mssg}</div>
-                <div className={uploading ? "progress-cont active" : "progress-cont a11y-hidden"}>
-                    <p className="text">Uploading..</p>
-                    <div className="progress-bar" style={{ width: `${progress}%` }}></div>
-                </div>
 
                 <Button btnStyle="btn-outline--black">Edit</Button>
             </form>

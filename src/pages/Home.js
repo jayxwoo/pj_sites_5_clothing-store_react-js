@@ -7,8 +7,10 @@ import Masonry from 'react-masonry-css';
 const Home = () => {
     const { closeMenuBtn } = useContext(MenuBtnContext);
 
+    // Close menu btn and scroll to top on load
     useEffect(() => {
         closeMenuBtn();
+        window.scrollTo(0, 0);
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);

@@ -1,7 +1,7 @@
+import "../styles/pages/Seller.scss";
 import { useContext, useEffect } from "react";
 import Button from "../components/Button";
 import { MenuBtnContext } from "../contexts/MenuBtnContext";
-import "../styles/pages/Seller.scss";
 import { AiOutlinePlus } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
@@ -13,8 +13,10 @@ const Seller = () => {
     const { closeMenuBtn } = useContext(MenuBtnContext);
     const { products } = useFirestore('products');
 
+    // Close menu btn and scroll to top on load
     useEffect(() => {
         closeMenuBtn();
+        window.scrollTo(0, 0);
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);

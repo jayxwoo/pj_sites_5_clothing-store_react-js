@@ -1,1 +1,48 @@
 @import "../base";
+
+@import "../base";
+
+.shop {
+  width: 100%;
+  background: $lightergrey;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .shop-cont {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3rem 1rem;
+
+    .product-group {
+      width: 100%;
+    }
+  }
+}
+
+@include mQ($width--m) {
+  .shop {
+    .shop-cont {
+      .product-group {
+        .shop-item {
+          flex-direction: column;
+
+          .img-cont {
+            width: 100%;
+            padding-bottom: 100%;
+          }
+
+          .info-cont {
+            width: 100%;
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+}
