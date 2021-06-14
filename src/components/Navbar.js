@@ -31,7 +31,7 @@ const Navbar = () => {
                     <NavLink className="link" exact to="/">Home</NavLink>
                     <NavLink className="link" to="/shop">Shop</NavLink>
                     <NavLink className="link" to="/seller">Seller</NavLink>
-                    <Link className="btnLink" to="/cart"><Button btnStyle={mobile ? "btn-outline--white" : "btn-outline--black"} btnSize={mobile ? "btn--mobile" : "btn--medium"}>Cart</Button></Link>
+                    <Link className="btnLink" to="/cart"><Button btnStyle={mobile ? "btn-outline--white" : "btn-outline--black"} btnSize={mobile ? "btn--mobile" : "btn--medium"}>Cart ()</Button></Link>
                 </nav>
                 <button className={mobile ? "menuBtn active" : "menuBtn"}>
                     {menuBtn ? (<MdClose className="menuIcon" onClick={closeMenuBtn} />) : (<MdMenu className="menuIcon" onClick={openMenuBtn} />)}

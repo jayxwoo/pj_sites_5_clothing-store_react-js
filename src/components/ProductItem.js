@@ -23,9 +23,9 @@ const ProductItem = ({ data }) => {
             </div>
             <div className="info-cont">
                 <h2 className="title">{data.title}</h2>
-                <h3 className="price">{data.price}</h3>
-                <p className="gender">{data.gender}</p>
+                <h3 className="price">${data.price}</h3>
                 <p className="quantity">{`Quantity: ${data.quantity}`}</p>
+                <p className="gender">({data.gender})</p>
                 <p className="desc">{data.desc}</p>
                 <Link to={`/edit/${data.id}`}><Button btnStyle="btn-outline--black">Edit</Button></Link>
                 <Button btnStyle="btn-outline--red" onClick={handleDelete}>Delete</Button>
