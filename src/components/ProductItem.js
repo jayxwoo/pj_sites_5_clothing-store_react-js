@@ -1,15 +1,15 @@
+import { Link } from "react-router-dom";
 import { database } from "../firebase/config";
 import "../styles/components/ProductItem.scss";
 import Button from "./Button";
 
 const ProductItem = ({ data }) => {
-    const handleDelete = (id) => {
-        console.log(id);
+    const handleDelete = () => {
         if (window.confirm("Do you want to delete this product?")) {
             const collectionRef = database.collection('products');
 
-            collectionRef.doc(id).delete().then(() => {
-                console.log('product deleted');
+            collectionRef.doc(data.id).delete().then(() => {
+                console.log('product deleted!');
             }).catch((err) => {
                 console.log(err.message);
             });
@@ -27,8 +27,8 @@ const ProductItem = ({ data }) => {
                 <p className="gender">{data.gender}</p>
                 <p className="quantity">{`Quantity: ${data.quantity}`}</p>
                 <p className="desc">{data.desc}</p>
-                <Button btnStyle="btn-outline--black">Edit</Button>
-                <Button btnStyle="btn-outline--red" onClick={(e) => { handleDelete(data.id) }}>Delete</Button>
+                <Link to={`/edit/${data.id}`}><Button btnStyle="btn-outline--black">Edit</Button></Link>
+                <Button btnStyle="btn-outline--red" onClick={handleDelete}>Delete</Button>
             </div>
         </li>
     );

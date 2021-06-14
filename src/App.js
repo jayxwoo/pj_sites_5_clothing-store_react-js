@@ -9,6 +9,7 @@ import Cart from "./pages/Cart";
 import Navbar from "./components/Navbar";
 import Footer from './components/Footer';
 import Add from './pages/Add';
+import Edit from './pages/Edit';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
                 <Route exact path="/"><Home /></Route>
                 <Route path="/shop"><Shop /></Route>
                 <Route path="/seller"><Seller /></Route>
+                <Route path="/edit/:id"><Edit /></Route>
                 <Route path="/cart"><Cart /></Route>
                 <Route path="/add"><Add /></Route>
               </Switch>

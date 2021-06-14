@@ -1,13 +1,14 @@
-import { useRef, useState } from "react";
+import "../styles/pages/Edit.scss";
+import { useEffect, useRef, useState } from "react";
+import { useParams } from "react-router";
 import Button from "../components/Button";
-import "../styles/pages/Add.scss";
-import { storage, database, timestamp } from "../firebase/config";
-import Header from "../components/Header";
+import { database, storage, timestamp } from "../firebase/config";
 import { headerData } from "../data/headerData";
-import { AiOutlineLeft } from "react-icons/ai";
+import Header from "../components/Header";
 import { Link } from "react-router-dom";
+import { AiOutlineLeft } from "react-icons/ai";
 
-const Add = () => {
+const Edit = () => {
     const [title, setTitle] = useState('');
     const [price, setPrice] = useState('');
     const [gender, setGender] = useState('');
@@ -18,12 +19,27 @@ const Add = () => {
     const [mssg, setMssg] = useState('');
     const [uploading, setUploading] = useState(false);
     const [progress, setProgress] = useState(0);
+    const [img, setImg] = useState('');
 
     const fileInput = useRef();
     const genderInput = useRef();
     const types = ["image/png", "image/jpeg"];
 
-    // Handle file
+    const { id } = useParams();
+
+    useEffect(() => {
+        const collectionRef = database.collection('products');
+
+        collectionRef.doc(id).get().then((doc) => {
+            setTitle(doc.data().title);
+            setPrice(doc.data().price);
+            setGender(doc.data().gender);
+            setQuantity(doc.data().quantity);
+            setDesc(doc.data().desc);
+            setImg(doc.data().img);
+        });
+    }, [id]);
+
     const handleFile = (e) => {
         let selected = e.target.files[0];
 
@@ -33,10 +49,9 @@ const Add = () => {
         } else {
             setFile(null);
             setError("Please select an image file (png or jpeg)!");
-        }
+        };
     };
 
-    // Handle form submit event
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -87,14 +102,12 @@ const Add = () => {
                     setUploading(false);
                 });
             });
-        } else {
-            alert("Please select an image file (png or jpeg)!");
-        };
+        }
     };
 
     return (
-        <div className="add">
-            <Header data={headerData.add} />
+        <div className="edit">
+            <Header data={headerData.edit} />
             {!mssg && <Link to="/seller" className="backLink"><Button btnStyle="btn-outline--black" btnSize="btn--medium" className="backBtn"><AiOutlineLeft /></Button></Link>}
             <form className="form" onSubmit={handleSubmit}>
                 <label className="a11y-hidden">Title</label>
@@ -104,7 +117,7 @@ const Add = () => {
                 <input type="number" className="price input" placeholder="Price in NZD" value={price} onChange={(e) => { setPrice(e.target.value) }} required />
 
                 <label className="a11y-hidden">Gender</label>
-                <select className="gender input" defaultValue="" ref={genderInput} onChange={(e) => { setGender(e.target.value) }} required>
+                <select className="gender input" value={gender} ref={genderInput} onChange={(e) => { setGender(e.target.value) }} required>
                     <option value="" disabled>Select Gender..</option>
                     <option value="women">women</option>
                     <option value="men">men</option>
@@ -119,18 +132,19 @@ const Add = () => {
 
                 <label className="a11y-hidden">File</label>
                 <input type="file" className="file input" onChange={handleFile} ref={fileInput} required />
-                
+                <small className="file-notice">*Previous image file will be used automatically, if no file is newly selected.</small>
+
                 <div className={error ? "error active" : "error a11y-hidden"}>{error}</div>
                 <div className={mssg ? "mssg active" : "mssg a11y-hidden"}>{mssg}</div>
                 <div className={uploading ? "progress-cont active" : "progress-cont a11y-hidden"}>
                     <p className="text">Uploading..</p>
-                    <div className="progress-bar" style={{width: `${progress}%`}}></div>
+                    <div className="progress-bar" style={{ width: `${progress}%` }}></div>
                 </div>
 
-                <Button btnStyle="btn-outline--black">Add</Button>
+                <Button btnStyle="btn-outline--black">Edit</Button>
             </form>
         </div>
     );
 }
 
-export default Add;
+export default Edit;

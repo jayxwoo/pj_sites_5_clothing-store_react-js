@@ -2,6 +2,7 @@ import shopHeaderImg from "../assets/imgs/headerImgs/shop.jpeg";
 import sellerHeaderImg from "../assets/imgs/headerImgs/seller.jpeg";
 import addHeaderImg from "../assets/imgs/headerImgs/add.jpeg";
 import cartHeaderImg from "../assets/imgs/headerImgs/cart.jpeg";
+import editHeaderImg from "../assets/imgs/headerImgs/edit.jpeg";
 
 export const headerData = {
     shop: {
@@ -19,5 +20,9 @@ export const headerData = {
     cart: {
         img: cartHeaderImg,
         title: 'Cart',
+    },
+    edit: {
+        img: editHeaderImg,
+        title: 'Edit',
     },
 };
