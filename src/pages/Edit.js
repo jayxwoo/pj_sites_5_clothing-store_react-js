@@ -10,6 +10,7 @@ import { MenuBtnContext } from "../contexts/MenuBtnContext";
 
 const Edit = () => {
     const { closeMenuBtn } = useContext(MenuBtnContext);
+    const { id } = useParams();
 
     const [title, setTitle] = useState('');
     const [price, setPrice] = useState('');
@@ -25,8 +26,6 @@ const Edit = () => {
     const genderInput = useRef();
     const types = ["image/png", "image/jpeg"];
     const history = useHistory();
-
-    const { id } = useParams();
 
     // Close menu btn and scroll to top on load
     useEffect(() => {
