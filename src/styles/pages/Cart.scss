@@ -1,1 +1,80 @@
 @import "../base";
+
+.cart {
+  min-height: calc(100vh - 80px - 80px);
+  width: 100%;
+  background: $lightergrey;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+
+  .cart-cont {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3rem 1rem;
+    position: relative;
+
+    .cart-group {
+      width: 100%;
+    }
+
+    .cart-info {
+      background: $darkgrey;
+      color: white;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      text-align: center;
+      position: sticky;
+      bottom: 1rem;
+      margin: 1rem 0 0 auto;
+
+      .total {
+        font-weight: bold;
+        font-size: 2rem;
+
+        span {
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+}
+
+@include mQ($width--m) {
+  .cart {
+    .cart-cont {
+      .cart-group {
+        .cart-item {
+          flex-direction: column;
+
+          .img-cont {
+            width: 100%;
+            padding-bottom: 100%;
+          }
+
+          .info-cont {
+            width: 100%;
+            text-align: center;
+          }
+        }
+      }
+
+      .cart-info {
+        .total {
+          font-weight: bold;
+          font-size: 1.5rem;
+
+          span {
+            font-size: 0.7rem;
+          }
+        }
+      }
+    }
+  }
+}

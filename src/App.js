@@ -10,12 +10,14 @@ import Navbar from "./components/Navbar";
 import Footer from './components/Footer';
 import Add from './pages/Add';
 import Edit from './pages/Edit';
+import CartContextProvider from './contexts/CartContext';
 
 function App() {
   return (
     <Router>
       <MobileContextProvider>
         <MenuBtnContextProvider>
+          <CartContextProvider>
             <div className="App">
               <Navbar />
               <Switch>
@@ -28,6 +30,7 @@ function App() {
               </Switch>
               <Footer />
             </div>
+          </CartContextProvider>
         </MenuBtnContextProvider>
       </MobileContextProvider>
     </Router>

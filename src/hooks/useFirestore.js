@@ -19,10 +19,11 @@ const useFirestore = (collection) => {
                     };
                 });
                 setProducts(documents);
+                console.log('data fetched');
             });
 
             return () => { unsub() };
-    }, [collection, products]);
+    }, [collection]);
 
     return { products };
 };

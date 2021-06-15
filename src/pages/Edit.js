@@ -99,6 +99,7 @@ const Edit = () => {
                     setMssg('');
                     fileInput.current.value = '';
                     genderInput.current.value = '';
+                    console.log('data edited');
                     history.go(-1);
                 }).catch((err) => {
                     setError(err.message);
@@ -125,6 +126,7 @@ const Edit = () => {
                 setError('');
                 fileInput.current.value = '';
                 genderInput.current.value = '';
+                console.log('data edited');
                 history.go(-1);
             }).catch((err) => {
                 setError(err.message);

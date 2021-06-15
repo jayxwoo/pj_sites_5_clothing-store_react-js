@@ -89,9 +89,10 @@ const Add = () => {
                     setMssg('Your product has been uploaded successfully!');
                     setTimeout(() => {
                         setMssg('');
-                    }, 2000);
+                    }, 1000);
                     setUploading(false);
                     setProgress(0);
+                    console.log('data uploaded');
                 }).catch((err) => {
                     setError(err.message);
                     setUploading(false);

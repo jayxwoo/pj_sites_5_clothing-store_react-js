@@ -6,10 +6,12 @@ import { NavLink, Link } from "react-router-dom";
 import Button from "./Button";
 import { MdMenu, MdClose } from "react-icons/md";
 import { MenuBtnContext } from "../contexts/MenuBtnContext";
+import { CartContext } from "../contexts/CartContext";
 
 const Navbar = () => {
     const { mobile } = useContext(MobileContext);
     const { menuBtn, closeMenuBtn, openMenuBtn } = useContext(MenuBtnContext);
+    const { totalQ } = useContext(CartContext);
 
     window.addEventListener('resize', () => {
         if (!mobile) {
@@ -31,7 +33,7 @@ const Navbar = () => {
                     <NavLink className="link" exact to="/">Home</NavLink>
                     <NavLink className="link" to="/shop">Shop</NavLink>
                     <NavLink className="link" to="/seller">Seller</NavLink>
-                    <Link className="btnLink" to="/cart"><Button btnStyle={mobile ? "btn-outline--white" : "btn-outline--black"} btnSize={mobile ? "btn--mobile" : "btn--medium"}>Cart ()</Button></Link>
+                    <Link className="btnLink" to="/cart"><Button btnStyle={mobile ? "btn-outline--white" : "btn-outline--black"} btnSize={mobile ? "btn--mobile" : "btn--medium"}>Cart ({totalQ})</Button></Link>
                 </nav>
                 <button className={mobile ? "menuBtn active" : "menuBtn"}>
                     {menuBtn ? (<MdClose className="menuIcon" onClick={closeMenuBtn} />) : (<MdMenu className="menuIcon" onClick={openMenuBtn} />)}

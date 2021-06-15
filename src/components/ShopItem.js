@@ -1,8 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "../styles/components/ShopItem.scss";
 import Button from "./Button";
+import { CartContext } from "../contexts/CartContext";
+
 
 const ShopItem = ({ data }) => {
+    const { addToCart } = useContext(CartContext);
+
     const [userQ, setUserQ] = useState(0);
 
     const handleMinusQ = () => {
@@ -16,6 +20,16 @@ const ShopItem = ({ data }) => {
     const handlePlusQ = () => {
         if (userQ < data.quantity) {
             setUserQ(userQ + 1);
+        };
+    };
+
+    const handleCart = () => {
+        if (userQ > 0) {
+            const item = { ...data, userQ };
+            addToCart(item);
+            setUserQ(0);
+        } else {
+            alert("Please select quantity!");
         };
     };
 
@@ -34,7 +48,7 @@ const ShopItem = ({ data }) => {
                     <p className="user-q">{userQ}</p>
                     <button className="plus-btn q-btn" onClick={handlePlusQ}>+</button>
                 </div>
-                <Button btnStyle="btn-outline--blue">Add to Cart</Button>
+                <Button btnStyle="btn-outline--blue" onClick={handleCart}>Add to Cart</Button>
             </div>
         </li>
     );

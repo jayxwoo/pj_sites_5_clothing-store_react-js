@@ -1,14 +1,17 @@
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { database } from "../firebase/config";
 import "../styles/components/ProductItem.scss";
 import Button from "./Button";
 
 const ProductItem = ({ data }) => {
+    const history = useHistory();
+
     const handleDelete = () => {
         if (window.confirm("Do you want to delete this product?")) {
             const collectionRef = database.collection('products');
 
             collectionRef.doc(data.id).delete().then(() => {
+                history.go(0);
                 console.log('product deleted!');
             }).catch((err) => {
                 console.log(err.message);

@@ -1,0 +1,56 @@
+@import "../base";
+
+.cart-item {
+  width: 100%;
+  background: white;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  display: flex;
+
+  &:not(:last-of-type) {
+    margin-bottom: 1rem;
+  }
+
+  .img-cont {
+    width: 30%;
+    padding-bottom: 30%;
+    position: relative;
+  }
+
+  .img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0.5rem;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .info-cont {
+    width: 70%;
+    padding: 1rem 1.5rem 1.5rem;
+
+    .title {
+      &::first-letter {
+        text-transform: uppercase;
+      }
+    }
+
+    .gender {
+      font-size: 0.9rem;
+      color: $grey;
+    }
+
+    .desc {
+      color: $grey;
+      font-style: italic;
+      margin-top: 0.5rem;
+    }
+
+    .btn {
+      margin-top: 1rem;
+    }
+  }
+}
