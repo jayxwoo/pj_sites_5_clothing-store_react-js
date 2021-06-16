@@ -1,6 +1,6 @@
 # 5. Clothing Store (React.js & Firebase)
 ## Info
-- url: https://jayxwoo-test-1-clothing-retail-react-js-moustache.netlify.app/
+- url: https://jayxwoo-pj-sites-5-clothing-store-react-firebase.netlify.app/
 - github: https://github.com/jayxwoo/pj_sites_5_clothing-store_react-js
 - portfolio: https://jayxwoo.dev/
 
