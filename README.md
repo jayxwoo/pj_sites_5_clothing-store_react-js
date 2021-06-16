@@ -9,6 +9,7 @@
 - Firebase database and storage
 - Cart
 - Masonry grid UI
+- Responsive (desktop / mobile)
 
 ## Skills
 - HTML
