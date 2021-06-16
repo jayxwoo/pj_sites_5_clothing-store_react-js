@@ -1,7 +1,5 @@
 @import "../base";
 
-@import "../base";
-
 .shop {
   width: 100%;
   min-height: calc(100vh - 80px - 80px);
@@ -23,6 +21,12 @@
     .product-group {
       width: 100%;
     }
+  }
+}
+
+@include mQ($width--l) {
+  .shop {
+    min-height: calc(100vh - 80px - 80px - 80px);
   }
 }
 

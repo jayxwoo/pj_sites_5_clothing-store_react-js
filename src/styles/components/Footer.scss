@@ -1,55 +1,52 @@
 @import "../base";
 
 .footer {
-    width: 100%;
-    min-height: 80px;
-    background: $darkergrey;
-    color: white;
+  width: 100%;
+  height: 80px;
+  background: $darkergrey;
+  color: white;
 }
 .footer-cont {
-    width: 100%;
-    max-width: 1440px;
-    margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+
+  .logo {
+    color: white;
+  }
+
+  .icon-group {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1.5rem;
 
-    .logo {
-        color: white;
-    }
+    .icon-item {
+      &:not(:last-of-type) {
+        margin-right: 1rem;
+      }
 
-    .icon-group {
+      .icon-link {
         display: flex;
+        color: $lightgrey;
+        font-size: 1.5rem;
 
-        .icon-item {
-            &:not(:last-of-type) {
-                margin-right: 1rem;
-            }
-
-            .icon-link {
-                display: flex;
-                color: $lightgrey;
-                font-size: 1.5rem;
-
-                &:hover {
-                    color: white;
-                }
-            }
+        &:hover {
+          color: white;
         }
+      }
     }
+  }
 }
 
 @include mQ($width--l) {
+  .footer {
+    height: 160px;
+
     .footer-cont {
-        flex-direction: column;
-
-        .logo {
-            margin-bottom: 1rem;
-        }
-
-        .copyrights {
-            margin-bottom: 1.5rem;
-        }
+      flex-direction: column;
     }
+  }
 }

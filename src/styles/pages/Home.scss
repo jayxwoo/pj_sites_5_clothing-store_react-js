@@ -1,13 +1,14 @@
 @import "../base";
 
 .home {
-    width: 100%;
-    min-height: calc(100vh - 80px - 80px);
-}
-.home-cont {
+  width: 100%;
+  min-height: calc(100vh - 80px - 80px);
+
+  .home-cont {
     width: 100%;
     max-width: 1440px;
     margin: 0 auto;
+  }
 }
 
 .my-masonry-grid {
@@ -27,4 +28,10 @@
   /* change div to reference your elements you put in <Masonry> */
   background: grey;
   margin-bottom: 15px;
+}
+
+@include mQ($width--l) {
+  .home {
+    min-height: calc(100vh - 80px - 80px - 80px);
+  }
 }

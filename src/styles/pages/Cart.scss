@@ -46,6 +46,12 @@
   }
 }
 
+@include mQ($width--l) {
+  .cart {
+    min-height: calc(100vh - 80px - 80px - 80px);
+  }
+}
+
 @include mQ($width--m) {
   .cart {
     .cart-cont {
