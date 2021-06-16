@@ -92,7 +92,7 @@ const Add = () => {
                     }, 1000);
                     setUploading(false);
                     setProgress(0);
-                    console.log('data uploaded');
+                    console.log('product uploaded');
                 }).catch((err) => {
                     setError(err.message);
                     setUploading(false);
@@ -106,7 +106,7 @@ const Add = () => {
     return (
         <div className="add">
             <Header data={headerData.add} />
-            {!mssg && <Link to="/seller" className="backLink"><Button btnStyle="btn-outline--black" btnSize="btn--medium" className="backBtn"><AiOutlineLeft /></Button></Link>}
+            {!uploading && !progress && !mssg && <Link to="/seller" className="backLink"><Button btnStyle="btn-outline--black" btnSize="btn--medium" className="backBtn"><AiOutlineLeft /></Button></Link>}
             <form className="form" onSubmit={handleSubmit}>
                 <label className="a11y-hidden">Title</label>
                 <input type="text" className="title input" placeholder="Title" value={title} onChange={(e) => { setTitle(e.target.value) }} required />
