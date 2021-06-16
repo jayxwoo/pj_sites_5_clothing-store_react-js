@@ -1,8 +1,8 @@
 # 5. Clothing Store (React.js & Firebase)
 ## Info
-- url: https://jayxwoo-pj-sites-5-clothing-store-react-firebase.netlify.app/
-- github: https://github.com/jayxwoo/pj_sites_5_clothing-store_react-js
-- portfolio: https://jayxwoo.dev/
+- URL: https://jayxwoo-pj-sites-5-clothing-store-react-firebase.netlify.app/
+- GitHub: https://github.com/jayxwoo/pj_sites_5_clothing-store_react-js
+- Portfolio: https://jayxwoo.dev/
 
 ## Features
 - CRUD operations (fetch/display, add, edit, delete)
